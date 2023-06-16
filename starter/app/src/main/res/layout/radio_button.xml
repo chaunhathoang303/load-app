@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/radio_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
+
+        <RadioButton
+            android:id="@+id/glide_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="20dp"
+            android:text="@string/glide_name"
+            android:textSize="@dimen/default_text_size" />
+
+        <RadioButton
+            android:id="@+id/load_app_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="20dp"
+            android:text="@string/load_app_name"
+            android:textSize="@dimen/default_text_size" />
+
+        <RadioButton
+            android:id="@+id/retrofit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="@string/retrofit_name"
+            android:textSize="@dimen/default_text_size" />
+
+    </RadioGroup>
+
+</LinearLayout>
