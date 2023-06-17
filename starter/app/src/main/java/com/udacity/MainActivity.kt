@@ -12,6 +12,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -68,6 +69,12 @@ class MainActivity : AppCompatActivity() {
             if (selectedUrl != null) {
                 download(selectedUrl)
             } else {
+                val handler = Handler()
+                val delayInMillis = 1000L
+
+                handler.postDelayed({
+                    binding.contentMain.customButton.completedDownload()
+                }, delayInMillis)
                 Toast.makeText(this, getString(R.string.warning), Toast.LENGTH_SHORT).show()
             }
         }
@@ -161,6 +168,11 @@ class MainActivity : AppCompatActivity() {
             ).setContentText(getString(R.string.notification_description))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .addAction(
+                R.drawable.ic_launcher_foreground,
+                applicationContext.getString(R.string.check_status),
+                pendingIntent
+            )
         notify(NOTIFICATION_ID, builder.build())
     }
 

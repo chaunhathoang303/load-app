@@ -2,6 +2,7 @@ package com.udacity
 
 import android.content.Intent
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.udacity.databinding.ActivityDetailBinding
 

@@ -4,17 +4,24 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
+    private var backgroundButton: Int = Color.BLACK
+    private var textButton: String? = null
+
     private var widthSize = 0
     private var heightSize = 0
 
@@ -48,6 +55,17 @@ class LoadingButton @JvmOverloads constructor(
 
     init {
         isClickable = true
+
+        context.withStyledAttributes(attrs, R.styleable.LoadingButton) {
+            backgroundButton = getColor(
+                R.styleable.LoadingButton_backgroundButton,
+                ContextCompat.getColor(context, R.color.colorPrimary)
+            )
+
+            textButton = getString(
+                R.styleable.LoadingButton_textButton
+            )
+        }
     }
 
     override fun performClick(): Boolean {
@@ -63,7 +81,7 @@ class LoadingButton @JvmOverloads constructor(
         super.onDraw(canvas)
         canvas?.drawColor(context.getColor(R.color.colorPrimary))
         paint.strokeWidth = 0f
-        paint.color = context.getColor(R.color.colorPrimary)
+        paint.color = backgroundButton
         val rect = RectF(
             (width + 500f) / 2f - 50f,
             height / 2f - 50f,
@@ -79,12 +97,12 @@ class LoadingButton @JvmOverloads constructor(
             )
         }
         paint.color = context.getColor(R.color.white)
-        val buttonName =
+        textButton =
             if (buttonState == ButtonState.Loading) context.getString(R.string.button_loading) else context.getString(
                 R.string.download
             )
         canvas?.drawText(
-            buttonName,
+            textButton!!,
             width / 2f,
             (height - textSmallGlyphHeight) / 2f,
             paint
